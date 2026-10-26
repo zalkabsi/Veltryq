@@ -1,0 +1,288 @@
+{
+  "after": {
+    "captured_amount_minor": 10000,
+    "checks": [
+      {
+        "invariant_id": "FIN-IDEMPOTENCY",
+        "status": "passed"
+      },
+      {
+        "invariant_id": "FIN-REFUND-LIMIT",
+        "status": "passed"
+      },
+      {
+        "invariant_id": "FIN-LEDGER-BALANCE",
+        "status": "passed"
+      }
+    ],
+    "concurrent_requests": 2,
+    "currency": "USD",
+    "database": "postgresql",
+    "database_version": "17.11",
+    "errors": [],
+    "implementation": "repaired",
+    "ledger_entries": [
+      {
+        "account": "merchant_payable",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 3,
+        "payment_id": "6cb659ba-57dd-426b-8490-e96a1cd7bb0e",
+        "refund_id": "65d20ca5-2cff-4f82-98f8-d2a9ab1f616e",
+        "side": "debit"
+      },
+      {
+        "account": "settlement_clearing",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 4,
+        "payment_id": "6cb659ba-57dd-426b-8490-e96a1cd7bb0e",
+        "refund_id": "65d20ca5-2cff-4f82-98f8-d2a9ab1f616e",
+        "side": "credit"
+      }
+    ],
+    "payment_id": "6cb659ba-57dd-426b-8490-e96a1cd7bb0e",
+    "refund_count": 1,
+    "refund_credit_minor": 10000,
+    "refund_debit_minor": 10000,
+    "refund_ids": [
+      "65d20ca5-2cff-4f82-98f8-d2a9ab1f616e"
+    ],
+    "refund_ledger_entry_count": 2,
+    "refunds": [
+      {
+        "amount_minor": 10000,
+        "created_at": "2026-10-26T13:56:02.494127+00:00",
+        "id": "65d20ca5-2cff-4f82-98f8-d2a9ab1f616e",
+        "idempotency_key": "demo-retry-001",
+        "payment_id": "6cb659ba-57dd-426b-8490-e96a1cd7bb0e",
+        "request_hash": "44ba0897490783ab6826cf51e9c2bdc54536cc0c823de525525206ddc9b1a158"
+      }
+    ],
+    "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+    "requested_amount_minor_per_call": 10000,
+    "successful_responses": 2,
+    "total_refunded_minor": 10000,
+    "verdict": "passed",
+    "violations": []
+  },
+  "analysis": {
+    "analyzed_paths": [
+      "examples/demo/refund_candidate.py"
+    ],
+    "confidence": "selected_checks",
+    "rationale": "Checks were selected by the repository's explicit path mapping.",
+    "selected_invariants": [
+      "FIN-IDEMPOTENCY",
+      "FIN-LEDGER-BALANCE",
+      "FIN-REFUND-LIMIT"
+    ]
+  },
+  "analysis_scope": "known synthetic refund adapter on postgresql",
+  "artifact_urls": {
+    "evidence.html": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471135560/artifacts/file/artifacts/postgresql/evidence.html",
+    "evidence.json": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471135560/artifacts/file/artifacts/postgresql/evidence.json",
+    "regression.json": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471135560/artifacts/file/artifacts/postgresql/regression.json",
+    "repair.patch": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471135560/artifacts/file/artifacts/postgresql/repair.patch",
+    "review.md": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471135560/artifacts/file/artifacts/postgresql/review.md"
+  },
+  "baseline": {
+    "database": "postgresql",
+    "refund_count": 1,
+    "total_refunded_minor": 2500,
+    "verdict": "passed"
+  },
+  "before": {
+    "captured_amount_minor": 10000,
+    "checks": [
+      {
+        "invariant_id": "FIN-IDEMPOTENCY",
+        "status": "failed"
+      },
+      {
+        "invariant_id": "FIN-REFUND-LIMIT",
+        "status": "failed"
+      },
+      {
+        "invariant_id": "FIN-LEDGER-BALANCE",
+        "status": "passed"
+      }
+    ],
+    "concurrent_requests": 2,
+    "currency": "USD",
+    "database": "postgresql",
+    "database_version": "17.11",
+    "errors": [],
+    "implementation": "vulnerable",
+    "ledger_entries": [
+      {
+        "account": "merchant_payable",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 3,
+        "payment_id": "0dd3b036-39f7-4c65-a5c4-e8b3a0a9ff4a",
+        "refund_id": "7082cf01-5977-473a-9fc8-5e93ff4f7a10",
+        "side": "debit"
+      },
+      {
+        "account": "settlement_clearing",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 4,
+        "payment_id": "0dd3b036-39f7-4c65-a5c4-e8b3a0a9ff4a",
+        "refund_id": "7082cf01-5977-473a-9fc8-5e93ff4f7a10",
+        "side": "credit"
+      },
+      {
+        "account": "merchant_payable",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 5,
+        "payment_id": "0dd3b036-39f7-4c65-a5c4-e8b3a0a9ff4a",
+        "refund_id": "209c5a3f-3bf9-4dc5-9d0f-43992228ebd0",
+        "side": "debit"
+      },
+      {
+        "account": "settlement_clearing",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 6,
+        "payment_id": "0dd3b036-39f7-4c65-a5c4-e8b3a0a9ff4a",
+        "refund_id": "209c5a3f-3bf9-4dc5-9d0f-43992228ebd0",
+        "side": "credit"
+      }
+    ],
+    "payment_id": "0dd3b036-39f7-4c65-a5c4-e8b3a0a9ff4a",
+    "refund_count": 2,
+    "refund_credit_minor": 20000,
+    "refund_debit_minor": 20000,
+    "refund_ids": [
+      "7082cf01-5977-473a-9fc8-5e93ff4f7a10",
+      "209c5a3f-3bf9-4dc5-9d0f-43992228ebd0"
+    ],
+    "refund_ledger_entry_count": 4,
+    "refunds": [
+      {
+        "amount_minor": 10000,
+        "created_at": "2026-10-26T13:56:02.373076+00:00",
+        "id": "7082cf01-5977-473a-9fc8-5e93ff4f7a10",
+        "idempotency_key": "demo-retry-001",
+        "payment_id": "0dd3b036-39f7-4c65-a5c4-e8b3a0a9ff4a",
+        "request_hash": "f7745eace102536f4586782ea236937c21c73cec45d1357574f59d4dd5dabcc5"
+      },
+      {
+        "amount_minor": 10000,
+        "created_at": "2026-10-26T13:56:02.377784+00:00",
+        "id": "209c5a3f-3bf9-4dc5-9d0f-43992228ebd0",
+        "idempotency_key": "demo-retry-001",
+        "payment_id": "0dd3b036-39f7-4c65-a5c4-e8b3a0a9ff4a",
+        "request_hash": "f7745eace102536f4586782ea236937c21c73cec45d1357574f59d4dd5dabcc5"
+      }
+    ],
+    "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+    "requested_amount_minor_per_call": 10000,
+    "successful_responses": 2,
+    "total_refunded_minor": 20000,
+    "verdict": "confirmed_violation",
+    "violations": [
+      "FIN-IDEMPOTENCY",
+      "FIN-REFUND-LIMIT"
+    ]
+  },
+  "candidate_git_blob_sha": "90266d81e4cc781ae8339a3a70ecefc631da70f8",
+  "candidate_path": "examples/demo/refund_candidate.py",
+  "candidate_source_sha256": "5e4124ea51d3cdd1fc41e063f7bddf3b51e740bb7c081695662f6c956a8dd846",
+  "execution_channel": "gitlab_ci",
+  "execution_environment": {
+    "database": "postgresql 17.11",
+    "python": "3.12.15"
+  },
+  "generated_at": "2026-10-26T13:56:02.514106+00:00",
+  "gitlab_duo_execution": "not_recorded",
+  "invariants_tested": [
+    "FIN-IDEMPOTENCY",
+    "FIN-REFUND-LIMIT",
+    "FIN-LEDGER-BALANCE"
+  ],
+  "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471135560",
+  "limitations": [
+    "One finite deterministic contract is not a formal proof of financial safety.",
+    "Only the hash-matched synthetic source adapter is supported.",
+    "Repair verification creates a fresh schema; existing duplicate rows require reviewed reconciliation.",
+    "A local or CI run is not evidence that a native GitLab Duo flow executed."
+  ],
+  "merge_request_source_sha": null,
+  "merge_request_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/merge_requests/1",
+  "overall_verdict": "confirmed_violation_repaired",
+  "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/pipelines/2990010876",
+  "project": "Veltryq",
+  "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+  "remediation": {
+    "file": "app/refunds.py",
+    "function": "RefundService._refund_transaction",
+    "guidance": "Move idempotency lookup, refund-limit validation, refund insertion, and ledger posting into one database transaction. Add a unique constraint on (payment_id, idempotency_key)."
+  },
+  "remediation_status": "regression_passed",
+  "repair_proposal": {
+    "after_git_blob_sha": "19f88b053906ab9bf25be741534bb9cf45a54369",
+    "after_sha256": "c58eb08706b0f471f65136d49b6a8c0ffa0557200add5a53f799867034c11498",
+    "before_git_blob_sha": "90266d81e4cc781ae8339a3a70ecefc631da70f8",
+    "before_sha256": "5e4124ea51d3cdd1fc41e063f7bddf3b51e740bb7c081695662f6c956a8dd846",
+    "diff": "--- a/examples/demo/refund_candidate.py\n+++ b/examples/demo/refund_candidate.py\n@@ -1,4 +1,4 @@\n-\"\"\"Intentionally vulnerable teaching fixture. Never serve this implementation.\"\"\"\n+\"\"\"Reviewed repair template for the bounded synthetic refund adapter.\"\"\"\n \n from __future__ import annotations\n \n@@ -16,15 +16,13 @@\n         request_hash: str,\n         preflight_barrier: Barrier | None,\n     ) -> dict[str, object]:\n-        # BUG: prechecks finish before the locked write transaction.\n-        with self.storage.session() as session:\n-            payment = self._payment(session, payment_id)\n+        if preflight_barrier is not None:\n+            preflight_barrier.wait(timeout=10)\n+        # PostgreSQL FOR UPDATE / SQLite BEGIN IMMEDIATE covers every check and write.\n+        with self.storage.transaction() as session:\n+            payment = self._payment(session, payment_id, lock=True)\n             existing = self._existing_refund(session, payment_id, idempotency_key)\n             if existing is not None:\n                 return self._replay_or_conflict(existing, request_hash)\n             self._validate_refundable(payment, amount_minor)\n-        if preflight_barrier is not None:\n-            preflight_barrier.wait(timeout=10)\n-        with self.storage.transaction() as session:\n-            payment = self._payment(session, payment_id, lock=True)\n             return self._write_refund(session, payment, amount_minor, idempotency_key, request_hash)\n--- /dev/null\n+++ b/examples/demo/repair_schema.sql\n@@ -0,0 +1,3 @@\n+-- Synthetic sandbox only: existing duplicate rows need reviewed reconciliation.\n+CREATE UNIQUE INDEX refunds_idempotency_unique\n+ON refunds (payment_id, idempotency_key);\n",
+    "human_review_required": true,
+    "migration_scope": "fresh synthetic schema; populated data reconciliation is not automated",
+    "patch": "repair.patch",
+    "patch_sha256": "003faa4ce2c4067e1c4560dd252e7bca4f9c22c35ad413abf4ff8f275361c576",
+    "schema_change": "unique (payment_id, idempotency_key)",
+    "strategy": "reviewed_source_recipe",
+    "target_path": "examples/demo/refund_candidate.py"
+  },
+  "reproduction_commands": [
+    "python -m veltryq.cli regression --implementation vulnerable",
+    "python -m veltryq.cli regression --implementation repaired"
+  ],
+  "risk_level": "critical",
+  "schema_version": "1.1",
+  "source_commit_sha": "db1c0f316a56471ee5fa01d21f4555d4fbb2b7a7",
+  "source_location": {
+    "file": "examples/demo/refund_candidate.py",
+    "function": "FixtureRefundService._refund_transaction",
+    "mechanism": "prechecks occur outside the locked write transaction"
+  },
+  "trace": [
+    {
+      "elapsed_seconds": 1e-06,
+      "stage": "analyze",
+      "status": "selected_checks"
+    },
+    {
+      "elapsed_seconds": 0.154197,
+      "stage": "baseline",
+      "status": "passed"
+    },
+    {
+      "elapsed_seconds": 0.225574,
+      "stage": "reproduce",
+      "status": "confirmed_violation"
+    },
+    {
+      "elapsed_seconds": 0.226447,
+      "stage": "propose_repair",
+      "status": "exact_source_patch_generated"
+    },
+    {
+      "elapsed_seconds": 0.345905,
+      "stage": "verify_repair",
+      "status": "passed"
+    },
+    {
+      "elapsed_seconds": 0.346018,
+      "stage": "human_review",
+      "status": "required"
+    }
+  ],
+  "violations_confirmed": [
+    "FIN-IDEMPOTENCY",
+    "FIN-REFUND-LIMIT"
+  ]
+}

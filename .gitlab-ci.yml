@@ -1,0 +1,175 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+
+stages:
+  - quality
+  - test
+  - verify
+  - secure
+  - package
+  - govern
+
+default:
+  image: python:3.12-bookworm
+  before_script:
+    - python -m pip install --disable-pip-version-check --require-hashes -r requirements-dev.lock
+    - python -m pip install --no-deps --no-build-isolation -e .
+
+.veltryq_job:
+  rules:
+    - when: on_success
+
+quality_check:
+  extends: .veltryq_job
+  stage: quality
+  script:
+    - ruff check app veltryq tests scripts
+    - ruff format --check app veltryq tests scripts
+    - python scripts/verify_configs.py
+    - python -m compileall -q app veltryq scripts
+
+unit_tests:
+  extends: .veltryq_job
+  stage: test
+  script:
+    - mkdir -p artifacts/verification
+    - pytest -q --junitxml=artifacts/verification/junit-sqlite.xml
+  artifacts:
+    when: always
+    reports:
+      junit: artifacts/verification/junit-sqlite.xml
+    paths:
+      - artifacts/verification/junit-sqlite.xml
+    expire_in: 30 days
+
+counterexample_reproduction:
+  extends: .veltryq_job
+  stage: verify
+  script:
+    - mkdir -p artifacts/verification
+    - python scripts/ci_baseline.py
+    - |
+      set +e
+      python -m veltryq.cli regression --implementation vulnerable > artifacts/verification/vulnerable.log 2>&1
+      VELTRYQ_REGRESSION_EXIT=$?
+      set -e
+      cat artifacts/verification/vulnerable.log
+      test "$VELTRYQ_REGRESSION_EXIT" -eq 1
+    - python -m veltryq.cli regression --implementation repaired > artifacts/verification/repaired.log
+  artifacts:
+    when: always
+    paths:
+      - artifacts/verification/*.log
+    expire_in: 30 days
+
+financial_workflow_sqlite:
+  extends: .veltryq_job
+  stage: verify
+  script:
+    - python -m veltryq.cli workflow --out artifacts/sqlite
+  artifacts:
+    when: always
+    paths:
+      - artifacts/sqlite/
+    expose_as: "SQLite financial evidence"
+    expire_in: 30 days
+
+financial_workflow_postgres:
+  extends: .veltryq_job
+  stage: verify
+  services:
+    - name: postgres:17-alpine
+      alias: postgres
+  variables:
+    POSTGRES_DB: veltryq
+    POSTGRES_USER: veltryq
+    POSTGRES_PASSWORD: veltryq-ci-synthetic-only
+    VELTRYQ_TEST_DATABASE_URL: postgresql+psycopg://veltryq:veltryq-ci-synthetic-only@postgres:5432/veltryq
+  script:
+    - python scripts/wait_for_postgres.py
+    - mkdir -p artifacts/verification
+    - pytest -q tests/test_postgresql.py tests/test_engine.py tests/test_workflow.py --junitxml=artifacts/verification/junit-postgresql.xml
+    - python -m veltryq.cli workflow --out artifacts/postgresql
+  artifacts:
+    when: always
+    reports:
+      junit: artifacts/verification/junit-postgresql.xml
+    paths:
+      - artifacts/postgresql/
+      - artifacts/verification/junit-postgresql.xml
+    expose_as: "PostgreSQL financial evidence"
+    expire_in: 30 days
+
+security_checks:
+  extends: .veltryq_job
+  stage: secure
+  script:
+    - mkdir -p artifacts/verification
+    - python scripts/check_secrets.py app veltryq tests scripts .gitlab README.md pyproject.toml compose.yml
+    - bandit -q -r app veltryq -f json -o artifacts/verification/bandit.json
+    - pip-audit --require-hashes -r requirements-dev.lock --format json --output artifacts/verification/pip-audit.json
+  artifacts:
+    when: always
+    paths:
+      - artifacts/verification/bandit.json
+      - artifacts/verification/pip-audit.json
+    expire_in: 30 days
+
+candidate_regression:
+  extends: .veltryq_job
+  stage: verify
+  needs:
+    - job: financial_workflow_sqlite
+      artifacts: true
+  rules:
+    - exists:
+        - examples/demo/refund_candidate.py
+  allow_failure:
+    exit_codes: [1]
+  script:
+    - mkdir -p artifacts/verification
+    - python -m veltryq.cli candidate-regression --candidate examples/demo/refund_candidate.py --spec artifacts/sqlite/regression.json > artifacts/verification/candidate-regression.json
+  artifacts:
+    when: always
+    paths:
+      - artifacts/verification/candidate-regression.json
+    expire_in: 30 days
+
+source_package:
+  extends: .veltryq_job
+  stage: package
+  script:
+    - python -m build --no-isolation --outdir artifacts/packages
+    - python scripts/package_manifest.py
+  artifacts:
+    paths:
+      - artifacts/packages/
+    expire_in: 30 days
+
+governance_summary:
+  extends: .veltryq_job
+  stage: govern
+  needs:
+    - job: unit_tests
+      artifacts: true
+    - job: financial_workflow_sqlite
+      artifacts: true
+    - job: financial_workflow_postgres
+      artifacts: true
+    - job: security_checks
+      artifacts: true
+    - job: source_package
+      artifacts: true
+    - job: candidate_regression
+      artifacts: true
+      optional: true
+  script:
+    - python scripts/governance.py
+  artifacts:
+    paths:
+      - artifacts/governance.json
+    expire_in: 30 days

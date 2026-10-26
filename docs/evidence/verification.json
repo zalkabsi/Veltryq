@@ -1,0 +1,315 @@
+{
+  "observed_at": "2026-10-26T16:59:11.542033+00:00",
+  "observer": "Codex using authenticated GitLab API",
+  "records": {
+    "vulnerable": {
+      "mr_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/merge_requests/1",
+      "source_sha": "db1c0f316a56471ee5fa01d21f4555d4fbb2b7a7",
+      "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/pipelines/2990010876",
+      "postgres_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471135560",
+      "evidence_artifact_api_url": "https://gitlab.com/api/v4/projects/88110050/jobs/17471135560/artifacts/artifacts/postgresql/evidence.json",
+      "snapshot_sha256": "f221ebc87d13a39edb5cb3063e3bfc88234baea2272b85572b4adcc629fb9fe8",
+      "source_sha_matches": true,
+      "verdict": "confirmed_violation_repaired",
+      "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+      "regression_contract_sha256_matches": true,
+      "postgresql_test_suite": {
+        "name": "financial_workflow_postgres",
+        "total_count": 26,
+        "success_count": 26,
+        "failed_count": 0,
+        "skipped_count": 0,
+        "error_count": 0
+      },
+      "postgresql_test_cases": [
+        {
+          "name": "test_safe_candidate_does_not_report_a_confirmed_bug",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_reusing_an_output_directory_removes_stale_repair_artifacts",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_workflow_generates_real_patch_and_uses_identical_regression_contract",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_capture_failure_rolls_back_state_and_ledger",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_invariants_are_serializable_and_report_uses_execution_data",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_execution_error_cannot_be_reported_as_repaired",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_database_uniqueness_blocks_a_duplicate_outside_the_service",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_repaired_fixture_passes_same_scenario",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_concurrent_distinct_keys_cannot_over_refund",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_create_capture_and_refund_posts_balanced_ledger",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_same_key_and_payload_replays_one_refund",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_partial_refunds_cannot_exceed_capture",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_same_key_with_conflicting_payload_is_rejected",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_refund_failure_rolls_back_balance_refund_and_ledger",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_refund_requires_capture_and_capture_is_one_way",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_invalid_amount_and_currency_are_rejected",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_unknown_payment_is_not_found",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_fractional_boolean_and_unbounded_amounts_are_rejected",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_vulnerable_fixture_confirms_duplicate_and_over_refund",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_unknown_source_is_inconclusive_and_never_executed",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_explicit_analyzer_mapping_and_inconclusive_path",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_ci_provenance_is_linked_and_secrets_excluded",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_contract_rejects_commands_and_non_integer_money",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_html_escapes_candidate_supplied_content",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_per_refund_ledger_checks_prevent_cancelling_errors",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_unrelated_change_skips_financial_execution",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        }
+      ],
+      "patch_sha256": "003faa4ce2c4067e1c4560dd252e7bca4f9c22c35ad413abf4ff8f275361c576",
+      "patch_sha256_matches": true,
+      "repair_mr_source_matches_proposal": true
+    },
+    "repaired": {
+      "mr_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/merge_requests/2",
+      "source_sha": "4d50b650b74e601311438fd90474a0b4f6b82aed",
+      "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/pipelines/2990010971",
+      "postgres_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471136492",
+      "evidence_artifact_api_url": "https://gitlab.com/api/v4/projects/88110050/jobs/17471136492/artifacts/artifacts/postgresql/evidence.json",
+      "snapshot_sha256": "9bd85eadaa1b48cf20f3a0c4ec37ee60187e46238c5fe54b4c54f1e5f340a41e",
+      "source_sha_matches": true,
+      "verdict": "selected_checks_passed",
+      "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+      "regression_contract_sha256_matches": true,
+      "postgresql_test_suite": {
+        "name": "financial_workflow_postgres",
+        "total_count": 26,
+        "success_count": 26,
+        "failed_count": 0,
+        "skipped_count": 0,
+        "error_count": 0
+      },
+      "postgresql_test_cases": [
+        {
+          "name": "test_safe_candidate_does_not_report_a_confirmed_bug",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_workflow_generates_real_patch_and_uses_identical_regression_contract",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_reusing_an_output_directory_removes_stale_repair_artifacts",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_capture_failure_rolls_back_state_and_ledger",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_invariants_are_serializable_and_report_uses_execution_data",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_execution_error_cannot_be_reported_as_repaired",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_database_uniqueness_blocks_a_duplicate_outside_the_service",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_concurrent_distinct_keys_cannot_over_refund",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_repaired_fixture_passes_same_scenario",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_same_key_and_payload_replays_one_refund",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_partial_refunds_cannot_exceed_capture",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_create_capture_and_refund_posts_balanced_ledger",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_refund_failure_rolls_back_balance_refund_and_ledger",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_same_key_with_conflicting_payload_is_rejected",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_invalid_amount_and_currency_are_rejected",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_refund_requires_capture_and_capture_is_one_way",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_fractional_boolean_and_unbounded_amounts_are_rejected",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_unknown_payment_is_not_found",
+          "status": "success",
+          "classname": "tests.test_postgresql.PostgreSQLRefundTests"
+        },
+        {
+          "name": "test_vulnerable_fixture_confirms_duplicate_and_over_refund",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_unknown_source_is_inconclusive_and_never_executed",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_explicit_analyzer_mapping_and_inconclusive_path",
+          "status": "success",
+          "classname": "tests.test_engine.EngineTests"
+        },
+        {
+          "name": "test_ci_provenance_is_linked_and_secrets_excluded",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_contract_rejects_commands_and_non_integer_money",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_html_escapes_candidate_supplied_content",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_per_refund_ledger_checks_prevent_cancelling_errors",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        },
+        {
+          "name": "test_unrelated_change_skips_financial_execution",
+          "status": "success",
+          "classname": "tests.test_workflow.WorkflowTests"
+        }
+      ]
+    }
+  },
+  "native_duo_records": "Separate session and review-note records; original CI evidence is preserved without adding a native session claim.",
+  "human_review": "required; no remediation merged or deployed"
+}

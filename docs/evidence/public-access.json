@@ -1,0 +1,38 @@
+[
+  {
+    "record": "repository",
+    "http_status": 200,
+    "visibility": "public",
+    "license": "mit"
+  },
+  {
+    "record": "vulnerable_pipeline",
+    "http_status": 200,
+    "status": "success"
+  },
+  {
+    "record": "vulnerable_evidence",
+    "http_status": 200,
+    "verdict": "confirmed_violation_repaired",
+    "source_sha": "db1c0f316a56471ee5fa01d21f4555d4fbb2b7a7"
+  },
+  {
+    "record": "repaired_pipeline",
+    "http_status": 200,
+    "status": "success"
+  },
+  {
+    "record": "repaired_evidence",
+    "http_status": 200,
+    "verdict": "selected_checks_passed",
+    "source_sha": "4d50b650b74e601311438fd90474a0b4f6b82aed"
+  },
+  {
+    "record": "mr1_agent_notes",
+    "error": "HTTP Error 401: Unauthorized"
+  },
+  {
+    "record": "mr2_agent_notes",
+    "error": "HTTP Error 401: Unauthorized"
+  }
+]

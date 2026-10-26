@@ -1,0 +1,236 @@
+{
+  "after": {
+    "captured_amount_minor": 10000,
+    "checks": [
+      {
+        "invariant_id": "FIN-IDEMPOTENCY",
+        "status": "passed"
+      },
+      {
+        "invariant_id": "FIN-REFUND-LIMIT",
+        "status": "passed"
+      },
+      {
+        "invariant_id": "FIN-LEDGER-BALANCE",
+        "status": "passed"
+      }
+    ],
+    "concurrent_requests": 2,
+    "currency": "USD",
+    "database": "postgresql",
+    "database_version": "17.11",
+    "errors": [],
+    "implementation": "repaired",
+    "ledger_entries": [
+      {
+        "account": "merchant_payable",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 3,
+        "payment_id": "b45c40bc-f954-4e1e-bcdb-2ef05ede6b61",
+        "refund_id": "a437e225-883b-48a1-9f85-dd392c842345",
+        "side": "debit"
+      },
+      {
+        "account": "settlement_clearing",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 4,
+        "payment_id": "b45c40bc-f954-4e1e-bcdb-2ef05ede6b61",
+        "refund_id": "a437e225-883b-48a1-9f85-dd392c842345",
+        "side": "credit"
+      }
+    ],
+    "payment_id": "b45c40bc-f954-4e1e-bcdb-2ef05ede6b61",
+    "refund_count": 1,
+    "refund_credit_minor": 10000,
+    "refund_debit_minor": 10000,
+    "refund_ids": [
+      "a437e225-883b-48a1-9f85-dd392c842345"
+    ],
+    "refund_ledger_entry_count": 2,
+    "refunds": [
+      {
+        "amount_minor": 10000,
+        "created_at": "2026-10-26T13:56:07.003930+00:00",
+        "id": "a437e225-883b-48a1-9f85-dd392c842345",
+        "idempotency_key": "demo-retry-001",
+        "payment_id": "b45c40bc-f954-4e1e-bcdb-2ef05ede6b61",
+        "request_hash": "e02d4a72670968b9dbc92ca89faab78883bf4a937f25c247125cefbd51b1d29d"
+      }
+    ],
+    "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+    "requested_amount_minor_per_call": 10000,
+    "successful_responses": 2,
+    "total_refunded_minor": 10000,
+    "verdict": "passed",
+    "violations": []
+  },
+  "analysis": {
+    "analyzed_paths": [
+      "examples/demo/refund_candidate.py"
+    ],
+    "confidence": "selected_checks",
+    "rationale": "Checks were selected by the repository's explicit path mapping.",
+    "selected_invariants": [
+      "FIN-IDEMPOTENCY",
+      "FIN-LEDGER-BALANCE",
+      "FIN-REFUND-LIMIT"
+    ]
+  },
+  "analysis_scope": "known synthetic refund adapter on postgresql",
+  "artifact_urls": {
+    "evidence.html": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471136492/artifacts/file/artifacts/postgresql/evidence.html",
+    "evidence.json": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471136492/artifacts/file/artifacts/postgresql/evidence.json",
+    "regression.json": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471136492/artifacts/file/artifacts/postgresql/regression.json",
+    "review.md": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471136492/artifacts/file/artifacts/postgresql/review.md"
+  },
+  "baseline": {
+    "database": "postgresql",
+    "refund_count": 1,
+    "total_refunded_minor": 2500,
+    "verdict": "passed"
+  },
+  "before": {
+    "captured_amount_minor": 10000,
+    "checks": [
+      {
+        "invariant_id": "FIN-IDEMPOTENCY",
+        "status": "passed"
+      },
+      {
+        "invariant_id": "FIN-REFUND-LIMIT",
+        "status": "passed"
+      },
+      {
+        "invariant_id": "FIN-LEDGER-BALANCE",
+        "status": "passed"
+      }
+    ],
+    "concurrent_requests": 2,
+    "currency": "USD",
+    "database": "postgresql",
+    "database_version": "17.11",
+    "errors": [],
+    "implementation": "repaired",
+    "ledger_entries": [
+      {
+        "account": "merchant_payable",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 3,
+        "payment_id": "0260eaf4-1218-44b9-a602-6bbb666a430c",
+        "refund_id": "e19510c2-a5f4-4006-87ab-4f1665b2412f",
+        "side": "debit"
+      },
+      {
+        "account": "settlement_clearing",
+        "amount_minor": 10000,
+        "currency": "USD",
+        "id": 4,
+        "payment_id": "0260eaf4-1218-44b9-a602-6bbb666a430c",
+        "refund_id": "e19510c2-a5f4-4006-87ab-4f1665b2412f",
+        "side": "credit"
+      }
+    ],
+    "payment_id": "0260eaf4-1218-44b9-a602-6bbb666a430c",
+    "refund_count": 1,
+    "refund_credit_minor": 10000,
+    "refund_debit_minor": 10000,
+    "refund_ids": [
+      "e19510c2-a5f4-4006-87ab-4f1665b2412f"
+    ],
+    "refund_ledger_entry_count": 2,
+    "refunds": [
+      {
+        "amount_minor": 10000,
+        "created_at": "2026-10-26T13:56:06.876621+00:00",
+        "id": "e19510c2-a5f4-4006-87ab-4f1665b2412f",
+        "idempotency_key": "demo-retry-001",
+        "payment_id": "0260eaf4-1218-44b9-a602-6bbb666a430c",
+        "request_hash": "0fb277b67e8788ffcb3d146e8d3e5d8f34ad6d46acf90635928bbeffc2c8c995"
+      }
+    ],
+    "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+    "requested_amount_minor_per_call": 10000,
+    "successful_responses": 2,
+    "total_refunded_minor": 10000,
+    "verdict": "passed",
+    "violations": []
+  },
+  "candidate_git_blob_sha": "19f88b053906ab9bf25be741534bb9cf45a54369",
+  "candidate_path": "examples/demo/refund_candidate.py",
+  "candidate_source_sha256": "c58eb08706b0f471f65136d49b6a8c0ffa0557200add5a53f799867034c11498",
+  "execution_channel": "gitlab_ci",
+  "execution_environment": {
+    "database": "postgresql 17.11",
+    "python": "3.12.15"
+  },
+  "generated_at": "2026-10-26T13:56:07.027766+00:00",
+  "gitlab_duo_execution": "not_recorded",
+  "invariants_tested": [
+    "FIN-IDEMPOTENCY",
+    "FIN-REFUND-LIMIT",
+    "FIN-LEDGER-BALANCE"
+  ],
+  "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/jobs/17471136492",
+  "limitations": [
+    "One finite deterministic contract is not a formal proof of financial safety.",
+    "Only the hash-matched synthetic source adapter is supported.",
+    "Repair verification creates a fresh schema; existing duplicate rows require reviewed reconciliation.",
+    "A local or CI run is not evidence that a native GitLab Duo flow executed."
+  ],
+  "merge_request_source_sha": null,
+  "merge_request_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/merge_requests/2",
+  "overall_verdict": "selected_checks_passed",
+  "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/pipelines/2990010971",
+  "project": "Veltryq",
+  "regression_contract_sha256": "a43cd55616c884a1e6e65d5c63bee0d78d8456009c87af27cd0155c6af0cae9f",
+  "remediation": {
+    "file": "app/refunds.py",
+    "function": "RefundService._refund_transaction",
+    "guidance": "Move idempotency lookup, refund-limit validation, refund insertion, and ledger posting into one database transaction. Add a unique constraint on (payment_id, idempotency_key)."
+  },
+  "remediation_status": "not_needed",
+  "repair_proposal": null,
+  "reproduction_commands": [
+    "python -m veltryq.cli regression --implementation vulnerable",
+    "python -m veltryq.cli regression --implementation repaired"
+  ],
+  "risk_level": "none_observed",
+  "schema_version": "1.1",
+  "source_commit_sha": "4d50b650b74e601311438fd90474a0b4f6b82aed",
+  "source_location": {
+    "file": "examples/demo/refund_candidate.py",
+    "function": "FixtureRefundService._refund_transaction",
+    "mechanism": "prechecks occur outside the locked write transaction"
+  },
+  "trace": [
+    {
+      "elapsed_seconds": 1e-06,
+      "stage": "analyze",
+      "status": "selected_checks"
+    },
+    {
+      "elapsed_seconds": 0.229144,
+      "stage": "baseline",
+      "status": "passed"
+    },
+    {
+      "elapsed_seconds": 0.355904,
+      "stage": "reproduce",
+      "status": "passed"
+    },
+    {
+      "elapsed_seconds": 0.482148,
+      "stage": "verify_repair",
+      "status": "passed"
+    },
+    {
+      "elapsed_seconds": 0.48228,
+      "stage": "human_review",
+      "status": "required"
+    }
+  ],
+  "violations_confirmed": []
+}

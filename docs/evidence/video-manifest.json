@@ -1,0 +1,56 @@
+{
+  "duration_seconds": 169.306,
+  "synthetic_narration": true,
+  "video": "Veltryq-Demo.mp4",
+  "source": "Actual CLI output, downloaded PostgreSQL CI evidence, reviewed source patch, and observed native GitLab sessions. Source repair panel is labelled explanatory pseudocode. Scene 5 also shows the original public PostgreSQL HTML artifact captured in a browser. Narration generated with Flite and sped up 10 percent.",
+  "native_sessions": {
+    "2": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/automate/agent-sessions/10073724",
+    "1": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/automate/agent-sessions/10073722"
+  },
+  "scenes": [
+    {
+      "title": "A refund can be balanced and still be wrong.",
+      "start_seconds": 0,
+      "duration_seconds": 20.755
+    },
+    {
+      "title": "The ordinary baseline passes.",
+      "start_seconds": 20.755,
+      "duration_seconds": 17.855
+    },
+    {
+      "title": "Two approvals. One captured payment.",
+      "start_seconds": 38.611,
+      "duration_seconds": 20.409
+    },
+    {
+      "title": "Move the entire decision inside the lock.",
+      "start_seconds": 59.019,
+      "duration_seconds": 20.628
+    },
+    {
+      "title": "The regression contract stays unchanged.",
+      "start_seconds": 79.647,
+      "duration_seconds": 20.146
+    },
+    {
+      "title": "Real PostgreSQL tests. Real GitLab CI.",
+      "start_seconds": 99.793,
+      "duration_seconds": 25.174
+    },
+    {
+      "title": "A native Duo flow reviews the evidence.",
+      "start_seconds": 124.968,
+      "duration_seconds": 22.664
+    },
+    {
+      "title": "Evidence for a human decision.",
+      "start_seconds": 147.632,
+      "duration_seconds": 21.675
+    }
+  ],
+  "ffprobe_duration_seconds": 169.422891,
+  "sha256": "a619be97094a12898678415fbd051d2515ac77e142eac1e1590d714e82129723",
+  "bytes": 3369389,
+  "decoding_check": "Entire H.264/AAC file decoded successfully with ffmpeg"
+}

@@ -1,0 +1,16 @@
+{
+  "captured_amount_minor": 10000,
+  "currency": "USD",
+  "expected_maximum_refunded_minor": 10000,
+  "expected_refund_count": 1,
+  "idempotency_key": "demo-retry-001",
+  "invariants": [
+    "FIN-IDEMPOTENCY",
+    "FIN-LEDGER-BALANCE",
+    "FIN-REFUND-LIMIT"
+  ],
+  "origin": "built_in_adapter",
+  "requests": 2,
+  "scenario": "concurrent_duplicate_refund",
+  "schema_version": 1
+}

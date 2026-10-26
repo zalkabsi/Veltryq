@@ -1,0 +1,14 @@
+.git
+.env
+.venv
+__pycache__
+*.pyc
+*.egg-info
+*.db*
+artifacts
+dist
+build
+attachments
+.pytest_cache
+.ruff_cache
+Veltryq-Master-Prompt.txt

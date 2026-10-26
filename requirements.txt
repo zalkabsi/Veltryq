@@ -1,0 +1,2 @@
+# Install these pinned dependencies, then install the project with --no-deps.
+-r requirements.lock

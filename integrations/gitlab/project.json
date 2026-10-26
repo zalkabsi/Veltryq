@@ -1,0 +1,16 @@
+{
+  "project_id": 88110050,
+  "project_path": "gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq",
+  "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq",
+  "namespace_id": 145719960,
+  "onboarding_project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/showcase",
+  "flow_id": 1019851,
+  "flow_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/automate/flows/1019851",
+  "flow_catalog_url": "https://gitlab.com/explore/ai-catalog/flows/1019851",
+  "flow_version": "1.0.2",
+  "flow_consumer_id": 13261499,
+  "flow_trigger_id": 3179858,
+  "flow_trigger_username": "ai-veltryq-financial-integrity-review-gitlab-ai-hackathon",
+  "vulnerable_merge_request_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/merge_requests/1",
+  "repair_merge_request_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43715013/veltryq/-/merge_requests/2"
+}

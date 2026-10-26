@@ -1,0 +1,12 @@
+include README.md LICENSE THIRD_PARTY_NOTICES.md AGENTS.md
+include requirements.txt requirements.lock requirements-dev.lock
+include Dockerfile compose.yml .dockerignore .gitattributes .env.example .gitlab-ci.yml
+recursive-include .gitlab *.yml
+recursive-include docs *.md *.json *.patch
+recursive-include examples *.md *.py *.sql
+recursive-include scripts *.py
+recursive-include tests *.py
+prune artifacts
+prune build
+prune dist
+global-exclude __pycache__ *.pyc *.db *.db-shm *.db-wal

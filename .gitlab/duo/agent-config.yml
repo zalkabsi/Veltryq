@@ -1,0 +1,16 @@
+# Read by GitLab from the default branch. Review changes before merging.
+image: python:3.12-bookworm
+setup_script:
+  - |
+    set -eu
+    VELTRYQ_TRUSTED_ROOT="$(mktemp -d /tmp/veltryq-default.XXXXXX)"
+    git fetch origin main
+    git archive FETCH_HEAD | tar -x -C "$VELTRYQ_TRUSTED_ROOT"
+    python3 -m venv /tmp/veltryq-agent-runtime
+    /tmp/veltryq-agent-runtime/bin/python -m pip install --disable-pip-version-check --require-hashes -r "$VELTRYQ_TRUSTED_ROOT/requirements.lock"
+    /tmp/veltryq-agent-runtime/bin/python -m pip install --disable-pip-version-check --no-index --no-deps --no-build-isolation "$VELTRYQ_TRUSTED_ROOT"
+network_policy:
+  include_recommended_allowed: true
+  allowed_domains:
+    - gitlab.com
+  allow_all_unix_sockets: false

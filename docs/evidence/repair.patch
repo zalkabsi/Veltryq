@@ -1,0 +1,35 @@
+--- a/examples/demo/refund_candidate.py
++++ b/examples/demo/refund_candidate.py
+@@ -1,4 +1,4 @@
+-"""Intentionally vulnerable teaching fixture. Never serve this implementation."""
++"""Reviewed repair template for the bounded synthetic refund adapter."""
+ 
+ from __future__ import annotations
+ 
+@@ -16,15 +16,13 @@
+         request_hash: str,
+         preflight_barrier: Barrier | None,
+     ) -> dict[str, object]:
+-        # BUG: prechecks finish before the locked write transaction.
+-        with self.storage.session() as session:
+-            payment = self._payment(session, payment_id)
++        if preflight_barrier is not None:
++            preflight_barrier.wait(timeout=10)
++        # PostgreSQL FOR UPDATE / SQLite BEGIN IMMEDIATE covers every check and write.
++        with self.storage.transaction() as session:
++            payment = self._payment(session, payment_id, lock=True)
+             existing = self._existing_refund(session, payment_id, idempotency_key)
+             if existing is not None:
+                 return self._replay_or_conflict(existing, request_hash)
+             self._validate_refundable(payment, amount_minor)
+-        if preflight_barrier is not None:
+-            preflight_barrier.wait(timeout=10)
+-        with self.storage.transaction() as session:
+-            payment = self._payment(session, payment_id, lock=True)
+             return self._write_refund(session, payment, amount_minor, idempotency_key, request_hash)
+--- /dev/null
++++ b/examples/demo/repair_schema.sql
+@@ -0,0 +1,3 @@
++-- Synthetic sandbox only: existing duplicate rows need reviewed reconciliation.
++CREATE UNIQUE INDEX refunds_idempotency_unique
++ON refunds (payment_id, idempotency_key);
